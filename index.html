@@ -279,31 +279,43 @@
      CONTACT_EMAIL: fallback — if FORM_ENDPOINT is blank, the form opens the
        visitor's email app addressed to you instead.
      ============================================================ */
-  const FORM_ENDPOINT = "";
+  // Submissions are emailed to you via FormSubmit.co (free, no account). First submission
+  // triggers a one-time confirmation email to CONTACT_EMAIL — click its link to activate,
+  // after that every "Request early access" lands in your inbox.
   const CONTACT_EMAIL = "shofnercody@gmail.com";
+  const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + CONTACT_EMAIL;
 
   const form = document.getElementById('lead');
   const ok = document.getElementById('ok');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
-    if (FORM_ENDPOINT) {
-      try {
-        await fetch(FORM_ENDPOINT, {
-          method:'POST',
-          headers:{'Accept':'application/json','Content-Type':'application/json'},
-          body: JSON.stringify(data)
-        });
-      } catch (_) { /* fall through to mailto */ }
-      form.reset(); ok.style.display='block'; return;
+    const btn = form.querySelector('button');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method:'POST',
+        headers:{'Accept':'application/json','Content-Type':'application/json'},
+        body: JSON.stringify({
+          name: data.name, company: data.org, email: data.email,
+          _subject: 'ARIS early access — ' + (data.name || ''),
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+      if (!res.ok) throw new Error('bad status');
+      form.reset(); ok.style.display='block';
+      btn.disabled = false; btn.textContent = 'Request early access';
+    } catch (_) {
+      // Fallback: open the visitor's mail app pre-filled to you.
+      const subj = encodeURIComponent('ARIS early access — ' + (data.name||''));
+      const body = encodeURIComponent(
+        'Name: '+(data.name||'')+'\nCompany: '+(data.org||'')+'\nEmail: '+(data.email||'')+
+        '\n\nI\'d like a demo of ARIS.');
+      window.location.href = 'mailto:'+CONTACT_EMAIL+'?subject='+subj+'&body='+body;
+      ok.style.display='block';
+      btn.disabled = false; btn.textContent = 'Request early access';
     }
-    // Fallback: open the visitor's mail app pre-filled to you.
-    const subj = encodeURIComponent('ARIS early access — ' + (data.name||''));
-    const body = encodeURIComponent(
-      'Name: '+(data.name||'')+'\nCompany: '+(data.org||'')+'\nEmail: '+(data.email||'')+
-      '\n\nI\'d like a demo of ARIS.');
-    window.location.href = 'mailto:'+CONTACT_EMAIL+'?subject='+subj+'&body='+body;
-    ok.style.display='block';
   });
 </script>
 </body>
