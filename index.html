@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ARIS — Field-trial research software</title>
+<meta name="description" content="ARIS is modern agricultural field-trial software: design protocols, capture data offline on your phone, and generate stats and client-ready reports." />
+<!-- Open Graph (nice link previews when you text/email the URL) -->
+<meta property="og:title" content="ARIS — field-trial research software" />
+<meta property="og:description" content="Design trials. Capture data offline in the field. Get stats and reports ready to send." />
+<meta property="og:type" content="website" />
+<style>
+  :root{
+    --green:#16a34a; --green-d:#0f5132; --ink:#0f172a; --slate:#475569;
+    --line:#e2e8f0; --bg:#f8faf9; --card:#ffffff; --accent:#10b981;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  img{max-width:100%;display:block}
+  a{color:var(--green)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+
+  /* ---- header ---- */
+  header{position:sticky;top:0;z-index:20;background:rgba(248,250,249,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand .badge{background:linear-gradient(135deg,var(--green),var(--green-d));border-radius:9px;padding:7px 12px}
+  .brand .badge img{height:20px;width:auto}
+  .brand small{color:var(--slate);font-weight:600;font-size:12px;letter-spacing:.02em}
+  .btn{display:inline-block;border:0;cursor:pointer;font-weight:700;font-size:15px;border-radius:11px;padding:13px 22px;text-decoration:none;transition:.15s}
+  .btn-primary{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff}
+  .btn-primary:hover{filter:brightness(1.07)}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--green)}
+  .nav .btn{padding:10px 18px}
+
+  /* ---- hero ---- */
+  .hero{padding:72px 0 40px;text-align:center}
+  .kicker{display:inline-block;background:#e7f6ee;color:var(--green-d);font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;margin-bottom:20px}
+  h1{font-size:clamp(34px,5.4vw,56px);line-height:1.05;letter-spacing:-.02em;margin:.1em 0 .35em;font-weight:800}
+  h1 .hl{background:linear-gradient(135deg,var(--green),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:clamp(17px,2.2vw,21px);color:var(--slate);max-width:680px;margin:0 auto 30px}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .trust{margin-top:22px;color:var(--slate);font-size:14px}
+
+  /* ---- product mockup (real ARIS UI) ---- */
+  .showcase{margin:48px auto 0;max-width:940px;position:relative;display:flex;justify-content:center;align-items:flex-end}
+  .mock-desk{width:100%;max-width:720px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(15,81,50,.45)}
+  .mock-desk .bar{display:flex;align-items:center;gap:6px;padding:11px 14px;background:#eef3f1;border-bottom:1px solid var(--line)}
+  .mock-desk .bar i{width:11px;height:11px;border-radius:50%;display:block;background:#cbd5d3}
+  .mock-desk .bar i:nth-child(1){background:#f87171}.mock-desk .bar i:nth-child(2){background:#fbbf24}.mock-desk .bar i:nth-child(3){background:#34d399}
+  .mock-desk .bar span{margin-left:10px;font-size:12px;color:var(--slate)}
+  .mock-body{display:flex;min-height:300px}
+  .mock-side{width:150px;background:#0f5132;color:#d7f5e6;padding:14px 0;font-size:12.5px}
+  .mock-side .lg{padding:0 14px 12px;font-weight:800;color:#fff;letter-spacing:.04em}
+  .mock-side a{display:block;padding:8px 14px;color:#bfe6cf;text-decoration:none}
+  .mock-side a.on{background:rgba(255,255,255,.12);color:#fff;font-weight:700;border-left:3px solid var(--accent)}
+  .mock-main{flex:1;padding:18px 20px;text-align:left}
+  .mock-main h4{margin:0 0 3px;font-size:15px}
+  .mock-main .mut{color:var(--slate);font-size:12px;margin-bottom:14px}
+  table.mm{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.mm th{text-align:left;color:var(--slate);font-weight:700;border-bottom:2px solid var(--line);padding:6px 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:.03em}
+  table.mm td{padding:7px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  table.mm .grp{font-weight:800;color:var(--green-d)}
+  .mock-phone{position:absolute;right:0;bottom:-10px;width:210px;background:#0b1512;border:7px solid #0b1512;border-radius:30px;box-shadow:0 24px 50px -18px rgba(0,0,0,.5);overflow:hidden}
+  .mock-phone .scr{background:var(--bg);border-radius:22px;overflow:hidden}
+  .mp-top{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;padding:14px 14px 12px;text-align:left}
+  .mp-top b{font-size:14px}.mp-top .s{font-size:11px;color:#d7f5e6;display:block;margin-top:2px}
+  .mp-card{padding:12px;text-align:left}
+  .mp-card .r{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px;color:var(--ink)}
+  .mp-chip{display:inline-block;font-size:10.5px;padding:3px 8px;border-radius:999px;margin:0 4px 6px 0}
+  .mp-off{background:#fee2e2;color:#b91c1c}.mp-gps{background:#dcfce7;color:#166534}
+  .mp-input{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:11px;color:var(--slate);margin-bottom:8px}
+  .mp-save{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;text-align:center;padding:9px;border-radius:9px;font-weight:700;font-size:12px}
+  .mp-nav{display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid var(--line);font-size:10px;color:var(--slate);background:#fff}
+  .mp-nav .on{color:var(--green);font-weight:700}
+  @media(max-width:820px){ .mock-phone{position:static;width:230px;margin:18px auto 0} .showcase{flex-direction:column;align-items:center} }
+
+  /* ---- section ---- */
+  section{padding:60px 0}
+  .eyebrow{text-align:center;color:var(--green);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px;margin-bottom:8px}
+  h2{text-align:center;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;margin:0 0 40px;font-weight:800}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+  .card .ic{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--green),var(--green-d));display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .card h3{margin:.2em 0 .4em;font-size:19px}
+  .card p{margin:0;color:var(--slate);font-size:15px}
+
+  /* ---- story ---- */
+  .story{background:linear-gradient(135deg,var(--green-d),#093524);color:#eafff5;border-radius:22px;padding:48px 40px;margin:10px 0}
+  .story h2{color:#fff;text-align:left;margin-bottom:16px}
+  .story p{max-width:760px;font-size:18px;color:#d7f5e6;margin:0 0 14px}
+  .story .q{font-size:22px;font-weight:700;color:#fff;border-left:4px solid var(--accent);padding-left:18px;margin:24px 0 0}
+
+  /* ---- compare ---- */
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .cmp>div{padding:26px 28px}
+  .cmp .old{background:#fff}
+  .cmp .neu{background:#e7f6ee}
+  .cmp h4{margin:0 0 14px;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+  .cmp .old h4{color:var(--slate)}
+  .cmp .neu h4{color:var(--green-d)}
+  .cmp ul{margin:0;padding-left:20px;color:var(--slate)}
+  .cmp .neu ul{color:var(--ink)}
+  .cmp li{margin:9px 0}
+
+  /* ---- signup ---- */
+  .signup{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:44px 32px;text-align:center;max-width:640px;margin:0 auto}
+  .signup h2{margin-bottom:10px}
+  .signup p{color:var(--slate);margin:0 auto 24px;max-width:460px}
+  form{display:flex;flex-direction:column;gap:12px;max-width:420px;margin:0 auto}
+  input{font-size:16px;padding:14px 16px;border:1px solid var(--line);border-radius:11px;font-family:inherit}
+  input:focus{outline:2px solid var(--accent);border-color:transparent}
+  .ok{color:var(--green-d);font-weight:700;margin-top:14px;display:none}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--slate);font-size:14px;text-align:center}
+  footer .badge{background:linear-gradient(135deg,var(--green),var(--green-d));border-radius:7px;padding:5px 9px;display:inline-block;vertical-align:middle}
+  footer .badge img{height:15px}
+
+  @media(max-width:820px){ .cards{grid-template-columns:1fr} .cmp{grid-template-columns:1fr} .story{padding:34px 24px} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="badge"><img src="aris-logo-white.png" alt="ARIS"></span>
+      <small>Field-trial research software</small>
+    </div>
+    <a href="#access" class="btn btn-primary">Request early access</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="kicker">🌱 Now onboarding a first group of research teams</span>
+    <h1>Field-trial research software,<br><span class="hl">built for the field.</span></h1>
+    <p class="sub">ARIS replaces clunky, dated trial tools with a modern desktop app — and a phone that captures assessments, notes, and photos <b>offline in the field</b>, then syncs back automatically.</p>
+    <div class="cta-row">
+      <a href="#access" class="btn btn-primary">Request early access</a>
+      <a href="#demo" class="btn btn-ghost">See how it works</a>
+    </div>
+    <div class="trust">Purpose-built for agricultural field-trial research.</div>
+  </div>
+
+  <!-- PRODUCT MOCK -->
+  <div id="demo" class="showcase">
+    <div class="mock-desk">
+      <div class="bar"><i></i><i></i><i></i><span>ARIS — Statistics</span></div>
+      <div class="mock-body">
+        <div class="mock-side">
+          <div class="lg">ARIS</div>
+          <a>Trials</a><a>Assessment</a><a class="on">Statistics</a><a>Trial Map</a><a>Field Sync</a><a>Reports</a>
+        </div>
+        <div class="mock-main">
+          <h4>Botrytis efficacy — means separation</h4>
+          <div class="mut">RCBD · 4 reps × 8 treatments · ANOVA + LSD (α = 0.05)</div>
+          <table class="mm">
+            <thead><tr><th>Trt</th><th>Treatment</th><th>Mean</th><th>SE</th><th>Group</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Untreated check</td><td>62.4</td><td>2.1</td><td class="grp">a</td></tr>
+              <tr><td>2</td><td>Product A — 2.0 pt</td><td>41.7</td><td>2.0</td><td class="grp">b</td></tr>
+              <tr><td>4</td><td>Grower standard</td><td>31.2</td><td>1.9</td><td class="grp">bc</td></tr>
+              <tr><td>3</td><td>Product A — 3.0 pt</td><td>28.9</td><td>1.8</td><td class="grp">c</td></tr>
+              <tr><td>5</td><td>Product B</td><td>19.8</td><td>1.7</td><td class="grp">d</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="mock-phone"><div class="scr">
+      <div class="mp-top"><b>ARIS Field</b><span class="s">Botrytis efficacy · Plot 3, Rep 2</span></div>
+      <div class="mp-card">
+        <div class="r"><span>New assessment</span><span>10:24a</span></div>
+        <span class="mp-chip mp-off">● Offline</span><span class="mp-chip mp-gps">📍 35.30, −120.66</span>
+        <div class="mp-input">Severity 15% — lesions on lower leaves…</div>
+        <div class="mp-input">📷 photo attached</div>
+        <div class="mp-save">Save to queue</div>
+      </div>
+      <div class="mp-nav"><span class="on">Capture</span><span>Queue · 3</span><span>Account</span></div>
+    </div></div>
+  </div>
+
+  <!-- VALUE -->
+  <section>
+    <div class="eyebrow">What ARIS does</div>
+    <h2>Everything a trial needs, in one place</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="ic">📋</div>
+        <h3>Design the trial, not the spreadsheet</h3>
+        <p>Protocols, treatments, RCBD/CRD randomization, and plot maps built in minutes — not cobbled together in Excel.</p>
+      </div>
+      <div class="card">
+        <div class="ic">📵</div>
+        <h3>Capture data in the field, offline</h3>
+        <p>The phone app logs assessments, notes, and photos with GPS and time — no signal needed. It syncs the moment you’re back online.</p>
+      </div>
+      <div class="card">
+        <div class="ic">📊</div>
+        <h3>Stats &amp; reports ready to send</h3>
+        <p>ANOVA, LSD mean separation, trial maps, and client-ready reports — without exporting to a second tool.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section>
+    <div class="story">
+      <h2>Why ARIS exists</h2>
+      <p>Legacy trial software is slow, dated, and doesn’t come to the field with you. ARIS is the modern alternative — built specifically for how field-trial research actually gets done.</p>
+      <p>Now we’re opening ARIS to a small group of other researchers, CROs, and PCAs who are tired of the old way.</p>
+      <p class="q">“The trial software should get out of your way. That’s the whole point.”</p>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section>
+    <div class="eyebrow">The difference</div>
+    <h2>Modern, where it matters</h2>
+    <div class="cmp">
+      <div class="old">
+        <h4>Legacy trial tools</h4>
+        <ul>
+          <li>Desktop-only; paper &amp; clipboards in the field</li>
+          <li>Re-key field data back at the office</li>
+          <li>Export to a separate program for stats</li>
+          <li>Interfaces that feel a decade behind</li>
+        </ul>
+      </div>
+      <div class="neu">
+        <h4>ARIS</h4>
+        <ul>
+          <li>Phone app captures data <b>offline</b>, syncs automatically</li>
+          <li>Field notes &amp; photos flow straight into the trial</li>
+          <li>Stats, maps, and reports built in</li>
+          <li>Clean, fast, made this decade</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section id="access">
+    <div class="signup">
+      <h2>Get early access</h2>
+      <p>Drop your email and we’ll set you up with a demo and a trial season. No cost during the beta — we just want your feedback.</p>
+      <form id="lead">
+        <input name="name" placeholder="Your name" autocomplete="name" required>
+        <input name="org" placeholder="Company / organization" autocomplete="organization">
+        <input name="email" type="email" placeholder="Email" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Request early access</button>
+      </form>
+      <div class="ok" id="ok">✓ Thanks — we’ll be in touch shortly.</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="badge"><img src="aris-logo-white.png" alt="ARIS"></span>
+    &nbsp; ARIS — Agriculture Research Intelligence System<br>
+    <span style="opacity:.7">© 2026 ARIS.</span>
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     CONFIG — set these two, then re-deploy.
+     FORM_ENDPOINT: paste a free form endpoint (Formspree / Getform / Basin)
+       so leads land in a dashboard + your inbox. RECOMMENDED for the booth.
+       e.g. "https://formspree.io/f/abcxyz"
+     CONTACT_EMAIL: fallback — if FORM_ENDPOINT is blank, the form opens the
+       visitor's email app addressed to you instead.
+     ============================================================ */
+  const FORM_ENDPOINT = "";
+  const CONTACT_EMAIL = "shofnercody@gmail.com";
+
+  const form = document.getElementById('lead');
+  const ok = document.getElementById('ok');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (FORM_ENDPOINT) {
+      try {
+        await fetch(FORM_ENDPOINT, {
+          method:'POST',
+          headers:{'Accept':'application/json','Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+      } catch (_) { /* fall through to mailto */ }
+      form.reset(); ok.style.display='block'; return;
+    }
+    // Fallback: open the visitor's mail app pre-filled to you.
+    const subj = encodeURIComponent('ARIS early access — ' + (data.name||''));
+    const body = encodeURIComponent(
+      'Name: '+(data.name||'')+'\nCompany: '+(data.org||'')+'\nEmail: '+(data.email||'')+
+      '\n\nI\'d like a demo of ARIS.');
+    window.location.href = 'mailto:'+CONTACT_EMAIL+'?subject='+subj+'&body='+body;
+    ok.style.display='block';
+  });
+</script>
+</body>
+</html>
