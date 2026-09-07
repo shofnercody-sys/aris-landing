@@ -138,9 +138,9 @@
 
   <!-- HERO -->
   <div class="hero">
-    <span class="kicker">🌱 Now onboarding a first group of research teams</span>
+    <span class="kicker">🌱 Now licensing · 30-day free trial for research teams</span>
     <h1>Field-trial research software,<br><span class="hl">built for the field.</span></h1>
-    <p class="sub">ARIS replaces clunky, dated trial tools with a modern desktop app — and a phone that captures assessments, notes, and photos <b>offline in the field</b>, then syncs back automatically.</p>
+    <p class="sub">ARIS replaces clunky, dated trial tools with a modern desktop app — and a phone app that captures assessments, photos and voice notes <b>offline in the field</b>. Save one file, double-click it on the desktop, and it files itself into the right trial.</p>
     <div class="cta-row">
       <a href="#access" class="btn btn-primary">Request early access</a>
       <a href="#demo" class="btn btn-ghost">See how it works</a>
@@ -159,7 +159,7 @@
         </div>
         <div class="mock-main">
           <h4>Botrytis efficacy — means separation</h4>
-          <div class="mut">RCBD · 4 reps × 8 treatments · ANOVA + LSD (α = 0.05)</div>
+          <div class="mut">RCBD · 4 reps × 8 treatments · ANOVA + Tukey HSD (α = 0.05)</div>
           <table class="mm">
             <thead><tr><th>Trt</th><th>Treatment</th><th>Mean</th><th>SE</th><th>Group</th></tr></thead>
             <tbody>
@@ -176,13 +176,13 @@
     <div class="mock-phone"><div class="scr">
       <div class="mp-top"><b>ARIS Field</b><span class="s">Botrytis efficacy · Plot 3, Rep 2</span></div>
       <div class="mp-card">
-        <div class="r"><span>New assessment</span><span>10:24a</span></div>
-        <span class="mp-chip mp-off">● Offline</span><span class="mp-chip mp-gps">📍 35.30, −120.66</span>
-        <div class="mp-input">Severity 15% — lesions on lower leaves…</div>
+        <div class="r"><span>Assessment entry</span><span>10:24a</span></div>
+        <span class="mp-chip mp-off">● Offline</span><span class="mp-chip mp-gps">Plot 3 · Rep 2 · Trt 4</span>
+        <div class="mp-input">Botrytis severity: 12, 15, 9 → mean 12.0 (3 subsamples)</div>
         <div class="mp-input">📷 photo attached</div>
-        <div class="mp-save">Save to queue</div>
+        <div class="mp-save">Save · share file</div>
       </div>
-      <div class="mp-nav"><span class="on">Capture</span><span>Queue · 3</span><span>Account</span></div>
+      <div class="mp-nav"><span class="on">Entry</span><span>Results</span><span>Photos</span><span>Save</span></div>
     </div></div>
   </div>
 
@@ -199,12 +199,12 @@
       <div class="card">
         <div class="ic">📵</div>
         <h3>Capture data in the field, offline</h3>
-        <p>The phone app logs assessments, notes, and photos with GPS and time — no signal needed. It syncs the moment you’re back online.</p>
+        <p>The phone app records grid assessments, subsamples, photos and voice notes with no signal at all. It saves one file; drop it on the desktop and it files itself into the right trial, Field Log and Calendar.</p>
       </div>
       <div class="card">
         <div class="ic">📊</div>
         <h3>Stats &amp; reports ready to send</h3>
-        <p>ANOVA, LSD mean separation, trial maps, and client-ready reports — without exporting to a second tool.</p>
+        <p>ANOVA with Tukey, LSD, Duncan, SNK, Bonferroni or Scheffé letters, AUDPC progress curves, dose–response, power, trial maps and client-ready reports — every number cross-checked against scipy.</p>
       </div>
     </div>
   </section>
@@ -236,7 +236,7 @@
       <div class="neu">
         <h4>ARIS</h4>
         <ul>
-          <li>Phone app captures data <b>offline</b>, syncs automatically</li>
+          <li>Phone app captures data <b>offline</b>; one file imports it</li>
           <li>Field notes &amp; photos flow straight into the trial</li>
           <li>Stats, maps, and reports built in</li>
           <li>Clean, fast, made this decade</li>
@@ -249,7 +249,7 @@
   <section id="access">
     <div class="signup">
       <h2>Get early access</h2>
-      <p>Drop your email and we’ll set you up with a demo and a trial season. No cost during the beta — we just want your feedback.</p>
+      <p>Drop your email for a demo and a 30-day trial key. Pro $165/mo · Team (5 seats) $495/mo · Enterprise $995/mo — yearly billing includes 2 months free.</p>
       <form id="lead">
         <input name="name" placeholder="Your name" autocomplete="name" required>
         <input name="org" placeholder="Company / organization" autocomplete="organization">
@@ -282,7 +282,7 @@
   // Submissions are emailed to you via FormSubmit.co (free, no account). First submission
   // triggers a one-time confirmation email to CONTACT_EMAIL — click its link to activate,
   // after that every "Request early access" lands in your inbox.
-  const CONTACT_EMAIL = "shofnercody@gmail.com";
+  const CONTACT_EMAIL = "cody@aristrials.com";
   const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + CONTACT_EMAIL;
 
   const form = document.getElementById('lead');
