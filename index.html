@@ -95,6 +95,16 @@
   .card .ic{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--green),var(--green-d));display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
   .card h3{margin:.2em 0 .4em;font-size:19px}
   .card p{margin:0;color:var(--slate);font-size:15px}
+  .pricing .card{position:relative;display:flex;flex-direction:column}
+  .pricing .card.pop{border-color:var(--green);box-shadow:0 8px 30px rgba(22,163,74,.12)}
+  .pricing .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px;white-space:nowrap}
+  .pricing .price{font-size:38px;font-weight:800;color:var(--ink);margin:6px 0 0;line-height:1}
+  .pricing .price small{font-size:15px;font-weight:600;color:var(--slate)}
+  .pricing .yr{color:var(--slate);font-size:14px;margin:6px 0 16px}
+  .pricing ul{list-style:none;margin:0 0 18px;padding:0;text-align:left;color:var(--slate);font-size:14.5px;line-height:1.75}
+  .pricing ul li::before{content:'✓';color:var(--green);font-weight:700;margin-right:8px}
+  .pricing .card .btn{margin-top:auto;text-align:center}
+  .pricing .all{text-align:center;color:var(--slate);font-size:14px;margin:18px auto 0;max-width:620px}
 
   /* ---- story ---- */
   .story{background:linear-gradient(135deg,var(--green-d),#093524);color:#eafff5;border-radius:22px;padding:48px 40px;margin:10px 0}
@@ -255,11 +265,59 @@
     </div>
   </section>
 
+  <!-- PRICING -->
+  <section id="pricing" class="pricing">
+    <h2>Simple per-seat pricing. Everything included.</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Academic</h3>
+        <p class="price">$49<small>/seat/mo</small></p>
+        <p class="yr">$490/seat/yr · free for certified students</p>
+        <ul>
+          <li>ARIS desktop + ARIS Field phone app</li>
+          <li>Unlimited trials and reports</li>
+          <li>scipy-audited statistics + weather</li>
+          <li>GLP audit trail, review &amp; lock</li>
+          <li>Free for students who pass ARIS certification</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://app.aristrials.com/signup">Start 30-day free trial</a>
+      </div>
+      <div class="card pop">
+        <span class="tag">Most popular</span>
+        <h3>Professional</h3>
+        <p class="price">$120<small>/seat/mo</small></p>
+        <p class="yr">$1,200/seat/yr · 2 months free</p>
+        <ul>
+          <li>Everything included — no add-ons</li>
+          <li>Desktop + Field, weather, economics, multi-trial</li>
+          <li>Full GLP compliance: audit, reason-for-change, review &amp; lock, sponsor report</li>
+          <li>Shared protocols &amp; templates</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="btn btn-primary" href="https://app.aristrials.com/signup">Start 30-day free trial</a>
+      </div>
+      <div class="card">
+        <h3>Enterprise</h3>
+        <p class="price">Custom</p>
+        <p class="yr">from $2,000/seat/yr</p>
+        <ul>
+          <li>Everything in Professional</li>
+          <li>Dedicated support + SLA</li>
+          <li>Code-signed builds</li>
+          <li>Sponsor-standard reports</li>
+          <li>SSO &amp; onboarding</li>
+        </ul>
+        <a class="btn btn-ghost" href="mailto:cody@aristrials.com?subject=ARIS%20Enterprise">Talk to us</a>
+      </div>
+    </div>
+    <p class="all">Every plan includes everything — desktop, the phone app, weather, transparent statistics and full GLP compliance. No add-ons, no per-trial fees. Full details at <a href="https://app.aristrials.com/plans">app.aristrials.com/plans</a>.</p>
+  </section>
+
   <!-- SIGNUP -->
   <section id="access">
     <div class="signup">
       <h2>Get early access</h2>
-      <p>Drop your email for a demo and a 30-day trial key. Pro $165/mo · Team (5 seats) $495/mo · Enterprise $995/mo — yearly billing includes 2 months free.</p>
+      <p>Drop your email for a demo and a 30-day free trial. Academic $49 · Professional $120 per seat per month — yearly billing includes 2 months free. Everything included, GLP compliance built in.</p>
       <form id="lead">
         <input name="name" placeholder="Your name" autocomplete="name" required>
         <input name="org" placeholder="Company / organization" autocomplete="organization">
